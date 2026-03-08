@@ -33,7 +33,7 @@ services:
     ports:
       - "80:80"
     environment:
-      PUBLIC_IP: "13.126.228.87"
+      PUBLIC_IP: "13.201.43.34"
     depends_on:
       - backend
 
