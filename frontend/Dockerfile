@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:22-alpine AS build
 
 WORKDIR /opt
 
@@ -6,9 +6,13 @@ COPY . .
 
 RUN npm install && npm run build
 
-RUN apk add apache2
+FROM httpd:latest 
 
-RUN cp -rf dist/* /var/www/localhost/htdocs/
+# RUN apk add apache2
+
+COPY --from=build /opt/dist/ htdocs/ 
+
+# RUN cp -rf dist/* /var/www/localhost/htdocs/
 
 EXPOSE 80
 
